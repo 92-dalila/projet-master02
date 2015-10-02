@@ -338,6 +338,61 @@ END;*/
   END;
 */
 
+ /***************************************************  b-11 ************************************************/  
+ /*declare  
+     cursor  c is 
 
-/*************************************************** Procedure et fonction  ***************************************************/ 
+     select prix 
+     from exemplaire 
+     where  dulivre = 1 ; 
 
+     var c%ROWTYPE ; 
+ BEGIN 
+  
+    OPEN C  ; 
+    LOOP 
+    FETCH C INTO  VAR  ; 
+    EXIT WHEN 
+    C%notfound ; 
+    
+        update exemplaire set prix = var.prix + 10  WHERE EXEMPLAIRE.DULIVRE = 1 ; 
+
+
+     end loop  ; 
+ end ; */
+/*************************************************** Procedure et fonction  ***************************************************/
+ 
+
+create or replace
+procedure AugmenterPrix ( Myisbn IN NUMBER)
+ 
+ as  
+ 
+     cursor  c is 
+
+     select prix 
+     from exemplaire 
+     where  dulivre = Myisbn ; 
+
+     var c%ROWTYPE ;
+     
+ BEGIN 
+  
+    OPEN C  ; 
+    LOOP 
+    FETCH C INTO  VAR  ; 
+    EXIT WHEN 
+    C%notfound ; 
+    
+       update exemplaire set prix = var.prix + 10  WHERE EXEMPLAIRE.DULIVRE = 1 ; 
+
+     end loop ; 
+
+ end AugmenterPrix ;
+
+
+DECLARE 
+ BEGIN 
+   AugmenterPrix ( 1) ;
+ 
+ END ; 
