@@ -20,7 +20,7 @@ import org.springframework.stereotype.Service;
 public class HelloServiceImpl implements HelloService {
 
     @Resource
-    HelloDAO dao;
+    HelloDAO dao; // La ressource
 
     @Override
     public void add(String nom, String message) {
